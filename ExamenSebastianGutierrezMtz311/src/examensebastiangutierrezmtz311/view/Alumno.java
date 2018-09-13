@@ -66,6 +66,7 @@ public class Alumno extends javax.swing.JFrame {
         tfMateria = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
+        btnBaja = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,13 +95,13 @@ public class Alumno extends javax.swing.JFrame {
 
         tblAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "Apellido", "Estado", "Fecha Nac.", "Sexo", "CURP", "Materia"
+                "Nombre", "Apellido", "Estado", "Fecha Nac.", "Sexo", "CURP", "Materia"
             }
         ));
         jScrollPane1.setViewportView(tblAlumnos);
@@ -144,6 +145,13 @@ public class Alumno extends javax.swing.JFrame {
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
+            }
+        });
+
+        btnBaja.setText("Dar Baja");
+        btnBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBajaActionPerformed(evt);
             }
         });
 
@@ -195,10 +203,14 @@ public class Alumno extends javax.swing.JFrame {
                             .addComponent(btnSave)
                             .addComponent(btnSearch)
                             .addComponent(btnDelete)
-                            .addComponent(btnRefresh)
                             .addComponent(btnRegister)
-                            .addComponent(btnUpdate)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE))
+                            .addComponent(btnUpdate)
+                            .addComponent(btnBaja)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnRefresh)
+                        .addGap(24, 24, 24)))
                 .addGap(58, 58, 58))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -244,15 +256,17 @@ public class Alumno extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(tfSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUpdate))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addComponent(btnRefresh)
+                .addGap(24, 24, 24)
+                .addComponent(btnBaja)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(tfCURP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addComponent(btnExit)
                 .addContainerGap())
         );
@@ -339,7 +353,7 @@ public class Alumno extends javax.swing.JFrame {
         examensebastiangutierrezmtz311.model.Alumno temp = null;
         for(examensebastiangutierrezmtz311.model.Alumno alum : studentList)
         {
-          if ( alum.getId().contains(Id)) {
+          if ( alum.getNombre().contains(Id)) {
                 temp = alum;
             }        
         }
@@ -366,14 +380,13 @@ public class Alumno extends javax.swing.JFrame {
          
         for (int i = 0; i < studentList.size(); i++) {
             dtm.addRow(emptyRow);
-            dtm.setValueAt(studentList.get(i).getId(), i, 0);
-            dtm.setValueAt(studentList.get(i).getNombre(), i, 1);
-            dtm.setValueAt(studentList.get(i).getPaterno(), i, 2);
-            dtm.setValueAt(studentList.get(i).getEstado(), i, 3);
-            dtm.setValueAt(studentList.get(i).getFechaNacimiento(), i, 4);
-            dtm.setValueAt(studentList.get(i).getSexo(), i, 5);
-            dtm.setValueAt(studentList.get(i).getCURP(), i, 6);
-            dtm.setValueAt(studentList.get(i).getMateria().Nombre, i,7);            
+            dtm.setValueAt(studentList.get(i).getNombre(), i, 0);
+            dtm.setValueAt(studentList.get(i).getPaterno(), i, 1);
+            dtm.setValueAt(studentList.get(i).getEstado(), i, 2);
+            dtm.setValueAt(studentList.get(i).getFechaNacimiento(), i, 3);
+            dtm.setValueAt(studentList.get(i).getSexo(), i, 4);
+            dtm.setValueAt(studentList.get(i).getCURP(), i, 5);
+            dtm.setValueAt(studentList.get(i).getMateria().Nombre, i,6);            
         }
     }
     
@@ -397,7 +410,7 @@ public class Alumno extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        String id = tfId.getText().trim();
+        String id = tfId.getText().trim();//cambiar a busqueda por nombre
         if (!id.isEmpty()) {
         List<examensebastiangutierrezmtz311.model.Alumno> studentList = alumnoBLO.find(id);
         
@@ -433,9 +446,10 @@ public class Alumno extends javax.swing.JFrame {
         String estado = tfEstado.getText().trim();
         String FechaNac = tfFecha.getText().trim();
         String Sexo = tfSexo.getText().trim();
-        String CURP = tfCURP.getText().trim();
+        String CURP = GenerarCURP(name, apellidoP, FechaNac, Sexo, estado); 
         examensebastiangutierrezmtz311.model.Alumno alumno = new examensebastiangutierrezmtz311.model.Alumno(name,apellidoP,estado,FechaNac,Sexo,CURP);
         alumnoBLO.update(id, alumno);
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
@@ -453,6 +467,19 @@ public class Alumno extends javax.swing.JFrame {
         // TODO add your handling code here:
          RefreshTable(alumnoBLO.findAll());
     }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
+        // TODO add your handling code here:
+         String id = tfId.getText().trim();
+         String mat = tfMateria.getText().trim();
+         List<Materia> materias = matBLO.findAll();
+        List<examensebastiangutierrezmtz311.model.Alumno> studentList = alumnoBLO.findAll();
+        examensebastiangutierrezmtz311.model.Alumno baja = SelectByIdAlum(studentList, id);
+        Materia materia = SelectByName(materias, mat);
+        alumnoBLO.darDeBaja(baja, materia);
+        alumnoBLO.delete(baja);
+        
+    }//GEN-LAST:event_btnBajaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -490,6 +517,7 @@ public class Alumno extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBaja;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnRefresh;

@@ -10,7 +10,6 @@ package examensebastiangutierrezmtz311.model;
  * @author sebas
  */
 public class Materia {
-    public String Id;
     public String Nombre;
     public String Docente;
 
@@ -33,14 +32,6 @@ public class Materia {
 
     public void setDocente(String Docente) {
         this.Docente = Docente;
-    }
-
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(String Id) {
-        this.Id = Id;
     }
 
 }

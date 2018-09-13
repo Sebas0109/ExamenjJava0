@@ -35,9 +35,8 @@ public class Materia extends javax.swing.JFrame {
          
         for (int i = 0; i < materias.size(); i++) {
             dtm.addRow(emptyRow);
-            dtm.setValueAt(materias.get(i).getId(), i, 0);
-            dtm.setValueAt(materias.get(i).getNombre(), i, 1);
-            dtm.setValueAt(materias.get(i).getDocente(), i, 2);            
+            dtm.setValueAt(materias.get(i).getNombre(), i, 0);
+            dtm.setValueAt(materias.get(i).getDocente(), i, 1);            
         }
     }
      
@@ -50,12 +49,12 @@ public class Materia extends javax.swing.JFrame {
          }
     }
          
-    private examensebastiangutierrezmtz311.model.Materia SelectById(List<examensebastiangutierrezmtz311.model.Materia> mateList, String Id)
+    private examensebastiangutierrezmtz311.model.Materia SelectByName(List<examensebastiangutierrezmtz311.model.Materia> mateList, String Id)
     {
         examensebastiangutierrezmtz311.model.Materia temp = null;
         for(examensebastiangutierrezmtz311.model.Materia mate : mateList)
         {
-          if ( mate.getId().contains(Id)) {
+          if ( mate.getNombre().contains(Id)) {
                 temp = mate;
             }        
         }
@@ -90,13 +89,13 @@ public class Materia extends javax.swing.JFrame {
 
         tblMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Id", "Nombre", "Docente"
+                "Nombre", "Docente"
             }
         ));
         jScrollPane1.setViewportView(tblMaterias);
@@ -248,7 +247,8 @@ public class Materia extends javax.swing.JFrame {
         String id = tfId.getText().trim();
         String name = tfNombreMat.getText().trim();
         String docente = tfDocente.getText().trim();
-        examensebastiangutierrezmtz311.model.Materia materia = new examensebastiangutierrezmtz311.model.Materia(name,docente);
+        examensebastiangutierrezmtz311.model.Materia materia = new 
+        examensebastiangutierrezmtz311.model.Materia(name,docente);
         matBLO.update(id, materia);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -256,7 +256,7 @@ public class Materia extends javax.swing.JFrame {
         // TODO add your handling code here:
         String id = tfId.getText().trim();
         List<examensebastiangutierrezmtz311.model.Materia> matList = matBLO.findAll();
-        examensebastiangutierrezmtz311.model.Materia elim = SelectById(matList,id);
+        examensebastiangutierrezmtz311.model.Materia elim = SelectByName(matList,id);
         matBLO.delete(elim);
     }//GEN-LAST:event_btnDeleteActionPerformed
 

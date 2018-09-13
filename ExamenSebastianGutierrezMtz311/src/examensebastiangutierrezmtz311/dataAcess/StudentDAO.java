@@ -29,6 +29,8 @@ public interface StudentDAO {
     
     public void load();
     
+    public void darDeBaja(Alumno alumno, Materia materia);
+    
     public void commitChanges();
     
 }

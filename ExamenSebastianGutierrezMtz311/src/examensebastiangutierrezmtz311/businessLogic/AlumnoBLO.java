@@ -62,4 +62,9 @@ public class AlumnoBLO {
     {
         alumnoDAO.commitChanges();
     }
+    
+    public void darDeBaja(Alumno alumno, Materia materia)
+    {
+        alumnoDAO.darDeBaja(alumno, materia);
+    }
 }

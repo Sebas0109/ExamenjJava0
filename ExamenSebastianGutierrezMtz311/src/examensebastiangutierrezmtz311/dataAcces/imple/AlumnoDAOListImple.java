@@ -26,8 +26,6 @@ public class AlumnoDAOListImple implements StudentDAO {
     
     @Override
     public Alumno save(Alumno stud) {
-        String id = Integer.toString(studentList.size()+1);
-        stud.setId(id);
         studentList.add(stud);
         return stud;
     }
@@ -42,8 +40,8 @@ public class AlumnoDAOListImple implements StudentDAO {
         List<Alumno> resstudentList = new ArrayList<>();
         id = id.toLowerCase().trim(); //trim para quitar espacios
         for (Alumno student : studentList) {
-            if (student.getId().toLowerCase().contains(id)) {
-                resstudentList.add(student);
+            if (student.getNombre().toLowerCase().contains(id)) {
+                resstudentList.add(student);//-----------------
             }
         }
         return resstudentList;
@@ -56,10 +54,16 @@ public class AlumnoDAOListImple implements StudentDAO {
 
     @Override
     public void update(String id, Alumno alumno) {
-        int pos = Integer.parseInt(id);
-        pos--;
-        alumno.setId(id);
-        studentList.set(pos, alumno);
+        
+        Alumno temp = null;
+        id = id.toLowerCase();
+        for (Alumno alumn : studentList) {
+            if (alumn.getNombre().toLowerCase().contains(id)) {
+                temp = alumn;
+            }
+        }
+        int idAlumn = studentList.indexOf(temp);
+        studentList.set(idAlumn, alumno);
     }
 
     @Override
@@ -96,6 +100,11 @@ public class AlumnoDAOListImple implements StudentDAO {
     @Override
     public void register(Alumno alumno, Materia nombreMat) {
         alumno.setMateria(nombreMat);
+    }
+
+    @Override
+    public void darDeBaja(Alumno alumno, Materia materia) {
+        alumno.materia = null;
     }
     
 }

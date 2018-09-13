@@ -11,7 +11,6 @@ package examensebastiangutierrezmtz311.model;
  */
 public class Alumno {
     
-    public String Id;
     public String Nombre;
     public String Paterno;
     public String Estado;
@@ -27,14 +26,6 @@ public class Alumno {
         this.FechaNacimiento = FechaNacimiento;
         this.Sexo = Sexo;
         this.CURP = CURP;
-    }
-
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(String Id) {
-        this.Id = Id;
     }
     
     public String getNombre() {

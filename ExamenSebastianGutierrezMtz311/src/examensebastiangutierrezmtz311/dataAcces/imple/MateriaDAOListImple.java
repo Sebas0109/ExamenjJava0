@@ -24,10 +24,20 @@ public class MateriaDAOListImple implements MateriaDAO{
     
     private static List<Materia> materiaList = new ArrayList<>();
 
+//    @Override
+//    public Materia save(Materia mate) {
+//        String id = Integer.toString(materiaList.size()+1);
+//        mate.setId(id);
+//        materiaList.add(mate);
+//        return mate;
+//    }
+    
     @Override
     public Materia save(Materia mate) {
-        String id = Integer.toString(materiaList.size()+1);
-        mate.setId(id);
+        
+        //int idNum = Integer.parseInt(materiaList.get(materiaList.size()-1).Id);
+        //String id = Integer.toString(idNum);
+        //mate.setId(id);
         materiaList.add(mate);
         return mate;
     }
@@ -41,8 +51,8 @@ public class MateriaDAOListImple implements MateriaDAO{
     public List<Materia> find(String id) {
         List<Materia> resMateriaList = new ArrayList<>();
         id = id.toLowerCase().trim();
-        for (Materia materia : resMateriaList) {
-            if (materia.getId().toLowerCase().contains(id)) {
+        for (Materia materia : materiaList) {
+            if (materia.getNombre().toLowerCase().contains(id)) {
                 resMateriaList.add(materia);
             }
         }
@@ -56,11 +66,16 @@ public class MateriaDAOListImple implements MateriaDAO{
     
 
     @Override
-    public void update(String id, Materia materia) {
-        int idmat = Integer.parseInt(id);
-        idmat--;
-        materia.setId(id);
-        materiaList.set(idmat, materia);
+    public void update(String id, Materia materia) {       
+        Materia temp = null;
+        id = id.toLowerCase();
+        for (Materia mat: materiaList) { //busqueda de cambios por nombre
+            if (mat.getNombre().toLowerCase().contains(id)) {
+                temp = mat;
+            }
+        }
+        int idMat = materiaList.indexOf(temp);
+        materiaList.set(idMat, materia);
     }
 
     @Override
